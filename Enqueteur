@@ -1,0 +1,44 @@
+ENQUETEUR STATEGY ENTRY POINT
+
+FLOAT PIVOT = nbSuspect/ 2
+- étape 1 : est-ce que le nombre de suspects isolés ou dans le noir est supérieur au PIVOT ?
+            * YES ? --> STRATEGIE N°1
+            * NO ? --> STRATEGIE N°2
+
+ENQUETEUR STRATEGIE N°1
+* étape 0 : est-ce que le rouge est jouable?
+              - YES ? --> le jouer en essayant de le faire aller dans un case avec dans l'ordre de priorité (un suspect, dans la lumière, ou une personne)
+              - NO ? --> étape 1
+* étape 1 : Le personnage noir est jouable?
+              - YES ? --> Le faire jouer en utilisant son pouvoir (essayer de regroup le plus possible) --> FIN ALGO
+              - NO ? --> étape 2
+* étape 2 : Le personnage blanc est jouable?
+              - YES ? --> Le faire jouer sans utiliser son pouvoir -> FIN ALGO
+              - NO ? --> étape 3
+- étape 3 : Dans l'ordre des couleurs [Gris, Bleu, Marron, Violet, Rose] est ce que je peux me regrouper avec un personnage non jouable ?
+            * YES ? --> Faire le coup en question --> FIN ALGO
+            * NO? --> étape 3 avec Couleur += 1 (if gris, faire le coup quand meme mettre la panne de lumiere dans une salle vide)
+            * NO et plus de couleurs ? --> étape 4
+- étape 4 : Dans l'ordre des couleurs [Bleu, Marron, Violet, Rose] est ce que je peux aller dans une salle avec un personnage ?
+            * YES ? --> Faire le coup en question --> FIN ALGO
+            * NO? --> étape 4 avec Couleur += 1
+            * NO et plus de couleurs ? --> Random & FIN ALGO
+
+ENQUETEUR STRATEGIE N°2
+* étape 0 : est-ce que le rouge est jouable?
+              - YES ? --> le jouer en essayant de le faire aller dans un case Noire, seul ou accompagné d'un innocent (ou un suspect qui doit jouer sauf si c'est le violet)
+              - NO ? --> étape 1
+* étape 1 : Le personnage noir est jouable?
+              - YES ? --> Le faire jouer sans utiliser son pouvoir --> FIN ALGO
+              - NO ? --> étape 2
+* étape 2 : Le personnage blanc est jouable?
+              - YES ? --> Le faire jouer et utiliser son pouvoir s'il est possible d'isoler un suspect hors de portée des personnages restants a jouer -> FIN ALGO
+              - NO ? --> étape 3
+- étape 3 : Dans l'ordre des couleurs [Gris, Bleu, Marron, Violet, Rose] est ce que je peux m'isoler hors de portée des personnage jouables ou me mettre dans le noir ?
+            * YES ? --> Faire le coup en question --> FIN ALGO
+            * NO? --> étape 3 avec Couleur += 1 (if gris, faire le coup quand meme mettre la panne de lumiere dans une salle le plus remplie possible)
+            * NO et plus de couleurs ? --> étape 4
+- étape 4 : Dans l'ordre des couleurs [Bleu, Marron, Violet, Rose] est ce que je peux m'isoler ?
+            * YES ? --> Faire le coup en question --> FIN ALGO
+            * NO? --> étape 4 avec Couleur += 1
+            * NO et plus de couleurs ? --> Random & FIN ALGO
