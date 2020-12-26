@@ -111,10 +111,10 @@ class Player():
         return 0
 
     def calc_answer(self, data):
-        if self.nb_suspect / 2 <= calc_isolate_suspect(data):
-            answer = strategy_one(data)
+        if self.nb_suspect / 2 <= self.calc_isolate_suspect(data):
+            answer = self.strategy_one(data)
         else:
-            answer = strategy_two(data)
+            answer = self.strategy_two(data)
         self.next_rep = [0, 0, 0, 0]
         return answer
 
@@ -124,11 +124,11 @@ class Player():
         data = question["data"]
         game_state = question["game state"]
         if self.step == 1:
-            response_index = self.calc_answer(question)
+            response = self.calc_answer(question)
         else:
-            response_index = self.next_rep[0]
+            response = self.next_rep[0]
             del self.next_rep[0]
-        response_index = random.randint(0, len(data)-1)
+        response_index = data.index(response)
         # log
         fantom_logger.debug("|\n|")
         fantom_logger.debug("fantom answers")
@@ -137,6 +137,8 @@ class Player():
         fantom_logger.debug(f"response index ---- {response_index}")
         fantom_logger.debug(f"response ---------- {data[response_index]}")
         print("------------------------------ REPONSE ------------------------------------")
+        print(response)
+        print(data)
         print(response_index)
         print("---------------------------- END REPONSE ----------------------------------")
         return response_index
