@@ -45,7 +45,11 @@ formatter = logging.Formatter(
     "%(asctime)s :: %(levelname)s :: %(message)s", "%H:%M:%S")
 
 os.path.exists("./logs/inspector.log") and os.remove("./logs/inspector.log")
-file_handler = RotatingFileHandler('./logs/inspector.log', 'a', 1000000, 1)
+try:
+    file_handler = RotatingFileHandler('./logs/inspector.log', 'a', 1000000, 1)
+except FileNotFoundError:
+    os.mkdir('logs')
+    file_handler = RotatingFileHandler('./logs/inspector.log', 'a', 1000000, 1)
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 inspector_logger.addHandler(file_handler)
