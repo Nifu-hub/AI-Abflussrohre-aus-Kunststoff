@@ -289,6 +289,10 @@ class Player():
     def answer(self, question):
         # work
         data = question["data"]
+        print()
+        print(--------------------------)
+        print(question['question type'])
+        print(data)
         game_state = question["game state"]
         if self.step == 1:
             response_index = self.calc_answer(question)
@@ -303,6 +307,10 @@ class Player():
             else:
                 response_index = random.randint(0, len(data)-1)
 
+        print('index ', response_index)
+        print('value ', data[response_index])
+        print('next move', self.next_rep)
+        print(--------------------------)
         # log
         inspector_logger.debug("|\n|")
         inspector_logger.debug("inspector answers")
