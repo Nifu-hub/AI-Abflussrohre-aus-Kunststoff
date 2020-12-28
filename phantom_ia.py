@@ -378,6 +378,7 @@ class Player():
         data = question['data']
         game_state = question['game state']
         response_index = 0
+        self.step0_strat1(data)
         phantom_logger.debug('|\n|')
         phantom_logger.debug('phantom answers')
         phantom_logger.debug(f'question type ----- {question["question type"]}')
