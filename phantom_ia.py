@@ -378,7 +378,6 @@ class Player():
         data = question['data']
         game_state = question['game state']
         response_index = 0
-        self.step0_strat1(data)
         phantom_logger.debug('|\n|')
         phantom_logger.debug('phantom answers')
         phantom_logger.debug(f'question type ----- {question["question type"]}')
@@ -386,6 +385,7 @@ class Player():
         phantom_logger.debug(f'response index ---- {response_index}')
         phantom_logger.debug(f'response ---------- {data[response_index]}')
         if question['question type'] == 'select character':
+            self.step0_strat1(data)
             return self.next_answer
         elif question['question type'] == 'select position':
             return self.next_move
