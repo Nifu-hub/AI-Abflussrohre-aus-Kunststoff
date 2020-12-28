@@ -251,7 +251,7 @@ class Player():
                     tmp_nb = len(pos[room])
             self.next_rep = [tmp_pos, 1]
             return self.playable(data, "white")
-        if self.playable(data, "grey"):
+        if self.playable(data, "grey") >= 0:
             available_movement = self.possible_movement("grey", self.find_pos("grey"))
             power_nb = -1
             power_pos = -1
